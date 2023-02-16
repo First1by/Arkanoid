@@ -7,7 +7,7 @@
     <body>
         <div id="main" class="main">
             <canvas id="playField" width="1000" height="600"></canvas>
-            <img id="background" src="./images/background.png" />
+            <img id="background" src="./images/black.jpg" />
             <div id="display">
                 <div id="score"></div>
                 <button id="start">Start</button>
@@ -41,6 +41,12 @@
             border-left: 1px solid grey;
             border-right: 1px solid grey;
             margin-bottom: 40px;
+        }
+
+        #background {
+            width: 1002px;
+            height: 601px;
+            object-fit: cover;
         }
 
         #display {
