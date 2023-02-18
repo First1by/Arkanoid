@@ -38,17 +38,28 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        // clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
         }),
         new CopyWebpackPlugin({
-            patterns: [{ from: 'src/images', to: 'images' }],
+            patterns: [
+                { from: './src/images', to: './images' },
+                {
+                    from: './src/audio',
+                    to: './audio',
+                },
+            ],
         }),
     ],
     devServer: {
         watchFiles: ['./*.html'],
         hot: true,
+    },
+    performance: {
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000,
     },
 };

@@ -22,15 +22,47 @@ import { createBricks } from './helpers';
 
 let gameOver = false;
 let score = 0;
+const soundOff = document.getElementById('mute') as HTMLElement;
+const lineMute = document.querySelector('.line');
+// async play sound
+const sound = new Audio();
+let volumeValue: number = 0.7;
+
+export function playSoundAsync(url: string) {
+    sound.src = `${url}`;
+    sound.play();
+    sound.volume = volumeValue;
+}
+
+const urlTrack: { [key: string]: string } = {
+    start: './audio/sfx-1.mp3',
+    gameover: './audio/sfx-2.mp3',
+    win: './audio/win.mp3',
+    collision: './audio/sfx-3.mp3',
+};
+
+// Sound controls - on/off
+
+soundOff.onclick = function (): void {
+    if (volumeValue != 0) {
+        volumeValue = 0;
+        lineMute?.classList.toggle('hide-line');
+    } else {
+        volumeValue = 0.7;
+        lineMute?.classList.toggle('hide-line');
+    }
+};
 
 function setGameOver(view: CanvasView) {
     view.drawInfo('Game Over!');
     gameOver = false;
+    playSoundAsync(urlTrack.gameover);
 }
 
 function setGameWin(view: CanvasView) {
     view.drawInfo('Game Won!');
     gameOver = false;
+    playSoundAsync(urlTrack.win);
 }
 
 function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball, collision: Collision) {
@@ -56,6 +88,7 @@ function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball,
     if (collidingBrick) {
         score += 1;
         view.drawScore(score);
+        playSoundAsync(urlTrack.collision);
     }
 
     // Game Over when ball leaves playField
@@ -70,6 +103,7 @@ function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball,
 
 function startGame(view: CanvasView) {
     // Reset displays
+    playSoundAsync(urlTrack.start);
     score = 0;
     view.drawInfo('');
     view.drawScore(0);

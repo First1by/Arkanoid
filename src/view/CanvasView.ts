@@ -27,7 +27,7 @@ export class CanvasView {
     }
 
     drawScore(score: number): void {
-        if (this.scoreDisplay) this.scoreDisplay.innerHTML = score.toString();
+        if (this.scoreDisplay) this.scoreDisplay.innerHTML = `Kick: ${score.toString()}`;
     }
 
     drawInfo(text: string): void {

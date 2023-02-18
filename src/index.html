@@ -10,6 +10,10 @@
             <img id="background" src="./images/black.jpg" />
             <div id="display">
                 <div id="score"></div>
+                <button id="mute">
+                    <img src="./images/sound.png" alt="sound on/off" />
+                    <span class="line hide-line">|</span>
+                </button>
                 <button id="start">Start</button>
                 <div id="info">Press play!</div>
             </div>
@@ -55,6 +59,24 @@
             display: flex;
             justify-content: space-between;
             width: var(--width);
+        }
+
+        #mute {
+            position: absolute;
+            left: 12%;
+        }
+
+        #mute .line {
+            position: absolute;
+            left: 17px;
+            top: -7px;
+            transform: rotateZ(45deg);
+            font-size: 40px;
+            color: blueviolet;
+        }
+
+        #mute .hide-line {
+            display: none;
         }
 
         #score,
