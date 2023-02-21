@@ -1,0 +1,69 @@
+:root {
+    --width: 1000px;
+    --height: 650px;
+}
+
+#main {
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+    width: var(--width);
+    height: var(--height);
+    font-size: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    border-top: 1px solid grey;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    margin-bottom: 40px;
+}
+
+#background {
+    width: 1002px;
+    height: 601px;
+    object-fit: cover;
+}
+
+#display {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    width: var(--width);
+}
+
+#mute {
+    position: absolute;
+    left: 12%;
+}
+
+#mute .line {
+    position: absolute;
+    left: 17px;
+    top: -7px;
+    transform: rotateZ(45deg);
+    font-size: 40px;
+    color: blueviolet;
+}
+
+#mute .hide-line {
+    display: none;
+}
+
+#score,
+#info {
+    width: 200px;
+}
+
+#levelNumber {
+    position: absolute;
+    right: 27%;
+}
+
+/*# sourceMappingURL=index.css.map */
