@@ -8,10 +8,11 @@ import {
     BRICK_HEIGHT,
     BRICK_PADDING,
     BRICK_ENERGY,
+    // LEVEL1,
 } from './setup';
 
-export function createBricks(): Brick[] {
-    return LEVEL.reduce((ack, element, i) => {
+export function createBricks(level: number[][], id: number): Brick[] {
+    return level[id].reduce((ack, element, i) => {
         const row = Math.floor((i + 1) / STAGE_COLS);
         const col = i % STAGE_COLS;
 

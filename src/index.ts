@@ -16,6 +16,8 @@ import {
     BALL_SIZE,
     BALL_STARTX,
     BALL_STARTY,
+    LEVEL,
+    // LEVEL1,
 } from './setup';
 // Helpers
 import { createBricks } from './helpers';
@@ -24,6 +26,8 @@ let gameOver = false;
 let score = 0;
 const soundOff = document.getElementById('mute') as HTMLElement;
 const lineMute = document.querySelector('.line');
+// const levelNumber = document.getElementById('levelNumber') as HTMLElement;
+
 // async play sound
 const sound = new Audio();
 let volumeValue: number = 0.7;
@@ -53,16 +57,24 @@ soundOff.onclick = function (): void {
     }
 };
 
+// Game
+let idLevel: number = 0;
+const increaseLevel = () => idLevel++;
+const resetLevel = () => (idLevel = 0);
+let dataLevel: string = `LEVEL${idLevel}`;
+
 function setGameOver(view: CanvasView) {
     view.drawInfo('Game Over!');
     gameOver = false;
     playSoundAsync(urlTrack.gameover);
+    resetLevel();
 }
 
 function setGameWin(view: CanvasView) {
     view.drawInfo('Game Won!');
     gameOver = false;
     playSoundAsync(urlTrack.win);
+    increaseLevel();
 }
 
 function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball, collision: Collision) {
@@ -107,10 +119,11 @@ function startGame(view: CanvasView) {
     score = 0;
     view.drawInfo('');
     view.drawScore(0);
+    view.drawLevel(idLevel);
     // Create a collision instance
     const collision = new Collision();
     // Create all bricks
-    const bricks = createBricks();
+    const bricks = createBricks(LEVEL, idLevel);
     // Create a Ball
     const ball = new Ball(BALL_SPEED, BALL_SIZE, { x: BALL_STARTX, y: BALL_STARTY }, BALL_IMAGE);
     // Create a Paddle

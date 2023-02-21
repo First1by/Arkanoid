@@ -9,6 +9,7 @@ export class CanvasView {
     private scoreDisplay: HTMLObjectElement | null;
     private start: HTMLObjectElement | null;
     private info: HTMLObjectElement | null;
+    private levelNumber: HTMLElement;
 
     constructor(canvasName: string) {
         this.canvas = document.querySelector(canvasName) as HTMLCanvasElement;
@@ -16,6 +17,7 @@ export class CanvasView {
         this.scoreDisplay = document.querySelector('#score');
         this.start = document.querySelector('#start');
         this.info = document.querySelector('#info');
+        this.levelNumber = document.getElementById('levelNumber') as HTMLElement;
     }
 
     clear(): void {
@@ -30,13 +32,16 @@ export class CanvasView {
         if (this.scoreDisplay) this.scoreDisplay.innerHTML = `Kick: ${score.toString()}`;
     }
 
+    drawLevel(idLevel: number): void {
+        if (this.levelNumber) this.levelNumber.innerHTML = `Level: ${idLevel++}`;
+    }
+
     drawInfo(text: string): void {
         if (this.info) this.info.innerHTML = text;
     }
 
     drawSprite(brick: Brick | Paddle | Ball): void {
         if (!brick) return;
-
         this.context?.drawImage(brick.image, brick.pos.x, brick.pos.y, brick.width, brick.height);
     }
 
