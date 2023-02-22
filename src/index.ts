@@ -26,7 +26,6 @@ let gameOver = false;
 let score = 0;
 const soundOff = document.getElementById('mute') as HTMLElement;
 const lineMute = document.querySelector('.line');
-// const levelNumber = document.getElementById('levelNumber') as HTMLElement;
 
 // async play sound
 const sound = new Audio();
@@ -68,6 +67,7 @@ function setGameOver(view: CanvasView) {
     gameOver = false;
     playSoundAsync(urlTrack.gameover);
     resetLevel();
+    view.clear();
 }
 
 function setGameWin(view: CanvasView) {
