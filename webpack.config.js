@@ -57,7 +57,7 @@ module.exports = {
                     from: './src/audio',
                     to: './audio',
                 },
-                { from: './src/index.css', to: './style' },
+                { from: './src/index.css', to: './' },
             ],
         }),
     ],
