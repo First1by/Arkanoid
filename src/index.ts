@@ -21,16 +21,23 @@ import {
 } from './setup';
 // Helpers
 import { createBricks } from './helpers';
+// import { lineDrawing } from './anime';
 
 let gameOver = false;
 let score = 0;
+const lineDrawing = document.getElementById('lineDrawing') as HTMLElement;
+const start = document.getElementById('start') as HTMLElement;
 const soundOff = document.getElementById('mute') as HTMLElement;
 const lineMute = document.querySelector('.line');
-// const levelNumber = document.getElementById('levelNumber') as HTMLElement;
+
+setTimeout(() => {
+    lineDrawing.style.opacity = '1';
+    lineDrawing.style.scale = '1';
+}, 400);
 
 // async play sound
 const sound = new Audio();
-let volumeValue: number = 0.7;
+let volumeValue = 0.7;
 
 export function playSoundAsync(url: string) {
     sound.src = `${url}`;
@@ -57,11 +64,15 @@ soundOff.onclick = function (): void {
     }
 };
 
+start.onclick = function (): void {
+    lineDrawing.style.display = 'none';
+};
+
 // Game
-let idLevel: number = 0;
+let idLevel = 0;
 const increaseLevel = () => idLevel++;
 const resetLevel = () => (idLevel = 0);
-let dataLevel: string = `LEVEL${idLevel}`;
+const dataLevel = `LEVEL${idLevel}`;
 
 function setGameOver(view: CanvasView) {
     view.drawInfo('Game Over!');

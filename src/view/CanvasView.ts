@@ -33,7 +33,7 @@ export class CanvasView {
     }
 
     drawLevel(idLevel: number): void {
-        if (this.levelNumber) this.levelNumber.innerHTML = `Level: ${idLevel++}`;
+        if (this.levelNumber) this.levelNumber.innerHTML = `Level: ${++idLevel}`;
     }
 
     drawInfo(text: string): void {

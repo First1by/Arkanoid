@@ -62,7 +62,7 @@ module.exports = {
         }),
     ],
     devServer: {
-        watchFiles: ['./*.html'],
+        watchFiles: ['src/**/*'], //'./*.html'
         hot: true,
     },
     performance: {
