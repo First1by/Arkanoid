@@ -53,7 +53,7 @@ canvas {
 
 #lineDrawing {
     position: absolute;
-    left: 9%;
+    left: 0;
     top: 6%;
     transition: all 2s;
     opacity: 0;
@@ -62,6 +62,11 @@ canvas {
 
 #lineDrawing svg {
     filter: drop-shadow(8px 0px 2px rgb(21 14 182 / 0.6));
+}
+
+#lineDrawing img {
+    width: 100%;
+    scale: 0.8;
 }
 
 /* path {
@@ -127,13 +132,21 @@ canvas {
     transition: all 0.2s;
 }
 
+#start:disabled {
+    background: #999;
+    color: #555;
+    transform: none;
+    box-shadow: none;
+    cursor: auto;
+}
+
 #score,
 #info {
     width: 200px;
     text-shadow: 0 0 3px #efbb1c, 0 0 0px #eae8ed, 0 0 1px #f2edf7, 0 0 1px #dbd2e3;
     }
 
-    #levelNumber {
+#levelNumber {
     width: 130px;
     text-shadow: 0 0 3px #efbb1c, 0 0 0px #eae8ed, 0 0 1px #f2edf7, 0 0 1px #dbd2e3;
         }

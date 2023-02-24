@@ -30,6 +30,7 @@ const start = document.getElementById('start') as HTMLElement;
 const soundOff = document.getElementById('mute') as HTMLElement;
 const lineMute = document.querySelector('.line');
 
+// Title game
 setTimeout(() => {
     lineDrawing.style.opacity = '1';
     lineDrawing.style.scale = '1';
@@ -64,21 +65,23 @@ soundOff.onclick = function (): void {
     }
 };
 
-start.onclick = function (): void {
+start.addEventListener('click', () => {
     lineDrawing.style.display = 'none';
-};
+    playSoundAsync(urlTrack.start);
+    start.setAttribute('disabled', 'disabled');
+});
 
 // Game
 let idLevel = 0;
 const increaseLevel = () => idLevel++;
 const resetLevel = () => (idLevel = 0);
-const dataLevel = `LEVEL${idLevel}`;
 
 function setGameOver(view: CanvasView) {
     view.drawInfo('Game Over!');
     gameOver = false;
     playSoundAsync(urlTrack.gameover);
     resetLevel();
+    start.removeAttribute('disabled');
 }
 
 function setGameWin(view: CanvasView) {
@@ -86,6 +89,7 @@ function setGameWin(view: CanvasView) {
     gameOver = false;
     playSoundAsync(urlTrack.win);
     increaseLevel();
+    start.removeAttribute('disabled');
 }
 
 function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball, collision: Collision) {
@@ -126,7 +130,6 @@ function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball,
 
 function startGame(view: CanvasView) {
     // Reset displays
-    playSoundAsync(urlTrack.start);
     score = 0;
     view.drawInfo('');
     view.drawScore(0);
