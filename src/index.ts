@@ -32,6 +32,7 @@ const win = document.getElementById('win') as HTMLElement;
 const start = document.getElementById('start') as HTMLElement;
 const soundOff = document.getElementById('mute') as HTMLElement;
 const lineMute = document.querySelector('.line');
+
 const pressStartInfo = document.getElementById('info') as HTMLElement;
 
 // Title game
@@ -103,6 +104,7 @@ function setGameOver(view: CanvasView) {
     playSoundAsync(urlTrack.gameover);
     resetLevel();
     start.removeAttribute('disabled');
+
 }
 
 function setGameWin(view: CanvasView) {
