@@ -17,19 +17,41 @@ import {
     BALL_STARTX,
     BALL_STARTY,
     LEVEL,
-    // LEVEL1,
 } from './setup';
 // Helpers
 import { createBricks } from './helpers';
 
+// Time
+import { clock } from './data';
+clock();
+
 let gameOver = false;
 let score = 0;
+const title = document.getElementById('title') as HTMLElement;
+const win = document.getElementById('win') as HTMLElement;
+const start = document.getElementById('start') as HTMLElement;
 const soundOff = document.getElementById('mute') as HTMLElement;
 const lineMute = document.querySelector('.line');
 
+const pressStartInfo = document.getElementById('info') as HTMLElement;
+
+// Title game
+setTimeout(() => {
+    title.style.opacity = '1';
+    title.style.scale = '1';
+}, 400);
+
+let timerId: NodeJS.Timer;
+function startInterval() {
+    timerId = setInterval(() => {
+        pressStartInfo.style.visibility = pressStartInfo.style.visibility == 'visible' ? 'hidden' : 'visible';
+    }, 750);
+}
+startInterval();
+
 // async play sound
 const sound = new Audio();
-let volumeValue: number = 0.7;
+let volumeValue = 0.7;
 
 export function playSoundAsync(url: string) {
     sound.src = `${url}`;
@@ -56,25 +78,64 @@ soundOff.onclick = function (): void {
     }
 };
 
+start.addEventListener('click', () => {
+    title.style.display = 'none';
+    playSoundAsync(urlTrack.start);
+    start.setAttribute('disabled', 'disabled');
+});
+
+// EN RU Changer
+let languages = 'en';
+
 // Game
-let idLevel: number = 0;
+let idLevel = 0;
 const increaseLevel = () => idLevel++;
-const resetLevel = () => (idLevel = 0);
-let dataLevel: string = `LEVEL${idLevel}`;
+const resetLevel = () => {
+    idLevel = 0;
+};
 
 function setGameOver(view: CanvasView) {
-    view.drawInfo('Game Over!');
+    if (languages == 'en') {
+        view.drawInfo('Game Over!');
+    } else {
+        view.drawInfo('Игра окончена!');
+    }
     gameOver = false;
     playSoundAsync(urlTrack.gameover);
     resetLevel();
-    view.clear();
+    start.removeAttribute('disabled');
+
 }
 
 function setGameWin(view: CanvasView) {
-    view.drawInfo('Game Won!');
+    if (languages == 'en') {
+        view.drawInfo('Level Complete!');
+    } else {
+        view.drawInfo('Уровень пройден!');
+    }
     gameOver = false;
     playSoundAsync(urlTrack.win);
     increaseLevel();
+    start.removeAttribute('disabled');
+    if (idLevel >= 3) {
+        resetLevel();
+        view.clear();
+        congratulations();
+        win.style.opacity = '1';
+        win.style.scale = '1';
+    }
+}
+
+function congratulations() {
+    if (languages == 'en') {
+        win.innerHTML = `
+        <p>Congratulations! You win the game.</p>
+        <img src="images/cool.png">`;
+    } else {
+        win.innerHTML = `
+        <p>Поздравляем! Вы прошли игру.</p>
+        <img src="images/cool.png">`;
+    }
 }
 
 function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball, collision: Collision) {
@@ -115,11 +176,13 @@ function gameLoop(view: CanvasView, bricks: Brick[], paddle: Paddle, ball: Ball,
 
 function startGame(view: CanvasView) {
     // Reset displays
-    playSoundAsync(urlTrack.start);
+    startInterval();
     score = 0;
     view.drawInfo('');
     view.drawScore(0);
     view.drawLevel(idLevel);
+    clearInterval(timerId);
+    win.innerHTML = '';
     // Create a collision instance
     const collision = new Collision();
     // Create all bricks
@@ -140,6 +203,39 @@ function startGame(view: CanvasView) {
 
     gameLoop(view, bricks, paddle, ball, collision);
 }
+
+// Languages
+
+export const langButton = document.querySelector('.lang') as HTMLElement;
+const startButton = document.getElementById('start') as HTMLElement;
+
+let selectedP: HTMLElement;
+
+function highlight(p: HTMLElement) {
+    if (selectedP) {
+        // убрать существующую подсветку, если есть
+        selectedP.classList.remove('active');
+    }
+    selectedP = p;
+    selectedP.classList.add('active'); // подсветить новый p
+}
+
+langButton.addEventListener('click', (e) => {
+    const pEnRu = document.querySelectorAll('.lang p');
+    const p = (e.target as HTMLTextAreaElement).closest('p') as HTMLElement;
+    if (!p) return;
+    pEnRu.forEach((item) => item.classList.remove('active'));
+    highlight(p);
+    if (p) {
+        languages = p.textContent as string;
+        view.getLang = p.textContent as string;
+    }
+    if (p.textContent == 'en') {
+        start.textContent = 'Start';
+    } else {
+        start.textContent = 'Старт';
+    }
+});
 
 // Create a new view
 const view = new CanvasView('#playField');

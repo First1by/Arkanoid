@@ -58,11 +58,12 @@ module.exports = {
                     to: './audio',
                 },
                 { from: './src/index.css', to: './' },
+                { from: './src/data.css', to: './' },
             ],
         }),
     ],
     devServer: {
-        watchFiles: ['./*.html'],
+        watchFiles: ['src/**/*'], //'./*.html'
         hot: true,
     },
     performance: {

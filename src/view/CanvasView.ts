@@ -10,6 +10,7 @@ export class CanvasView {
     private start: HTMLObjectElement | null;
     private info: HTMLObjectElement | null;
     private levelNumber: HTMLElement;
+    private languages: string;
 
     constructor(canvasName: string) {
         this.canvas = document.querySelector(canvasName) as HTMLCanvasElement;
@@ -18,6 +19,15 @@ export class CanvasView {
         this.start = document.querySelector('#start');
         this.info = document.querySelector('#info');
         this.levelNumber = document.getElementById('levelNumber') as HTMLElement;
+        this.languages = 'en';
+    }
+
+    get getLang() {
+        return this.languages;
+    }
+
+    set getLang(newLang) {
+        this.languages = newLang;
     }
 
     clear(): void {
@@ -29,11 +39,19 @@ export class CanvasView {
     }
 
     drawScore(score: number): void {
-        if (this.scoreDisplay) this.scoreDisplay.innerHTML = `Kick: ${score.toString()}`;
+        if (this.scoreDisplay && this.languages == 'en') {
+            this.scoreDisplay.innerHTML = `Kick: ${score.toString()}`;
+        } else if (this.scoreDisplay && this.languages == 'ru') {
+            this.scoreDisplay.innerHTML = `Ударов: ${score.toString()}`;
+        }
     }
 
     drawLevel(idLevel: number): void {
-        if (this.levelNumber) this.levelNumber.innerHTML = `Level: ${++idLevel}`;
+        if (this.levelNumber && this.languages == 'en') {
+            this.levelNumber.innerHTML = `Level: ${++idLevel}`;
+        } else if (this.levelNumber && this.languages == 'ru') {
+            this.levelNumber.innerHTML = `Уровень: ${++idLevel}`;
+        }
     }
 
     drawInfo(text: string): void {
