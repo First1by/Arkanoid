@@ -8,7 +8,6 @@ import {
     BRICK_HEIGHT,
     BRICK_PADDING,
     BRICK_ENERGY,
-    // LEVEL1,
 } from './setup';
 
 export function createBricks(level: number[][], id: number): Brick[] {

@@ -1,0 +1,116 @@
+body {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .setup {
+    position: absolute;
+    bottom: 10%;
+    right: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 15px;
+  }
+  
+  .clock {
+    border-radius: 100%;
+    background: rgb(0 0 0 / 46%);
+    font-family: "Montserrat";
+    border: 3px solid rgba(255, 248, 220, 0.2);
+    box-shadow: inset 2px 3px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .wrap {
+    overflow: hidden;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+  }
+  
+  .minute,
+  .hour {
+    position: absolute;
+    height: 25px;
+    width: 4px;
+    margin: auto;
+    top: -31%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 217, 0, 0.3);
+    transform-origin: bottom center;
+    transform: rotate(0deg);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+  
+  .minute {
+    position: absolute;
+    height: 32px;
+    width: 3px;
+    top: -39%;
+    left: 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    transform: rotate(90deg);
+  }
+  
+  .second {
+    position: absolute;
+    height: 35px;
+    width: 2px;
+    margin: auto;
+    top: -43%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 4px;
+    background: #ff4b3eb6;
+    transform-origin: bottom center;
+    transform: rotate(180deg);
+    z-index: 1;
+  }
+  
+  .dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.589);
+    border: 2px solid #1b1b1b;
+    border-radius: 100px;
+    margin: auto;
+    z-index: 1;
+  }
+
+  .lang {
+    position: relative;
+    left: 14px;
+    max-width: 100px;
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .lang p {
+    margin: 0 auto;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.644);
+    text-transform: uppercase;
+  }
+
+  .lang p.active {
+    color: bisque;
+    border-bottom: 1px solid bisque;;
+  }
+
+  .lang p:hover {
+    scale: 1.1;
+  }
+

@@ -30,13 +30,13 @@ body {
   margin: 0 auto;
   width: var(--width);
   height: var(--height);
-  font-size: 32px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-family: Roboto, sans-serif;
 }
 
 canvas {
   position: absolute;
-  left: 0;
+  left: -2px;
   top: 0;
   z-index: 10;
   margin-bottom: 40px;
@@ -51,7 +51,7 @@ canvas {
   object-fit: cover;
 }
 
-#lineDrawing {
+#title {
     position: absolute;
     left: 0;
     top: 6%;
@@ -60,25 +60,39 @@ canvas {
     scale: 0;
 }
 
-#lineDrawing svg {
+#title svg {
     filter: drop-shadow(8px 0px 2px rgb(21 14 182 / 0.6));
 }
 
-#lineDrawing img {
+#title img {
     width: 100%;
     scale: 0.8;
 }
 
-/* path {
-    fill:none;
-    stroke:#cfc33a;
-    stroke-width:4;
-  } */
+#win {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 1%;
+    transition: all 1s;
+    opacity: 0;
+    scale: 0;
+    color: bisque;
+    font-size: 40px;
+    font-family: Roboto, sans-serif;
+    text-align: center;
+}
+
+#win img {
+    max-width: 300px;
+}
 
 #display {
+  max-height: 62.5px;
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: var(--width);
   background: none;
   padding: 10px;
@@ -86,8 +100,10 @@ canvas {
 }
 
 #mute {
+  width: 47px;
+  height: 40px;
   position: absolute;
-  left: 15%;
+  left: 20%;
   border-radius: 50%;
   background: cornsilk;
   border: none;
@@ -99,9 +115,9 @@ canvas {
 #mute .line {
   position: absolute;
   left: 18px;
-  top: -6px;
+  top: -4px;
   transform: rotateZ(45deg);
-  font-size: 38px;
+  font-size: 34px;
   color: #b396ce;}
 
 #mute .hide-line {
@@ -151,6 +167,10 @@ canvas {
     text-shadow: 0 0 3px #efbb1c, 0 0 0px #eae8ed, 0 0 1px #f2edf7, 0 0 1px #dbd2e3;
         }
 
+.time {
+    color:#fff;
+}
+
 footer {
   margin-top: 10px;
   height: 60px;
@@ -166,6 +186,7 @@ footer {
 }
 footer h3 {
   text-shadow: 0 0 10px #efbb1c, 0 0 4px #eae8ed, 0 0 4px #f2edf7, 0 0 4px #dbd2e3;
+  font-family: Roboto, sans-serif;
 }
 footer a {
   text-shadow: 0 0 10px #efbb1c, 0 0 4px #eae8ed, 0 0 4px #f2edf7, 0 0 4px #dbd2e3;
