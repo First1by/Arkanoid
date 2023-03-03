@@ -1,5 +1,9 @@
 import { Vector } from '../types';
 
+let touchstartX = 0;
+let touchendX = 0;
+const canvas = document.getElementById('#playField') as HTMLCanvasElement;
+
 export class Paddle {
     private paddleImage: HTMLImageElement = new Image();
     private moveLeft: boolean;
@@ -23,6 +27,8 @@ export class Paddle {
         // Event Listeners
         document.addEventListener('keydown', this.handleKeyDown);
         document.addEventListener('keyup', this.handleKeyUp);
+        document.addEventListener('touchstart', this.handleTouchDown);
+        document.addEventListener('touchend', this.handleTouchUp);
     }
 
     // Getters
@@ -64,4 +70,25 @@ export class Paddle {
         if (e.code === 'ArrowLeft' || e.key === 'ArrowLeft') this.moveLeft = true;
         if (e.code === 'ArrowRight' || e.key === 'ArrowRight') this.moveRight = true;
     };
+
+    handleTouchDown = (e: TouchEvent): void => {
+        touchstartX = e.changedTouches[0].screenX;
+    };
+    handleTouchUp = (e: TouchEvent): void => {
+        touchendX = e.changedTouches[0].screenX;
+        this.changeDirection();
+    };
+
+    changeDirection(): void {
+        if (touchendX < touchstartX) {
+            this.moveLeft = true;
+        } else {
+            this.moveLeft = false;
+        }
+        if (touchendX > touchstartX) {
+            this.moveRight = true;
+        } else {
+            this.moveRight = false;
+        }
+    }
 }
