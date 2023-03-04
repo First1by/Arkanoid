@@ -50,10 +50,10 @@ function startInterval() {
 startInterval();
 
 // async play sound
-const sound = new Audio();
 let volumeValue = 0.7;
 
 export function playSoundAsync(url: string) {
+    const sound = new Audio();
     sound.src = `${url}`;
     sound.play();
     sound.volume = volumeValue;
@@ -104,7 +104,6 @@ function setGameOver(view: CanvasView) {
     playSoundAsync(urlTrack.gameover);
     resetLevel();
     start.removeAttribute('disabled');
-
 }
 
 function setGameWin(view: CanvasView) {
