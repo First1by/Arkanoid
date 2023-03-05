@@ -2,6 +2,7 @@ import { Vector } from '../types';
 
 let touchstartX = 0;
 let touchendX = 0;
+const DETECT_TRESHHOLD = 5;
 const canvas = document.getElementById('#playField') as HTMLCanvasElement;
 
 export class Paddle {
@@ -27,8 +28,9 @@ export class Paddle {
         // Event Listeners
         document.addEventListener('keydown', this.handleKeyDown);
         document.addEventListener('keyup', this.handleKeyUp);
-        document.addEventListener('touchstart', this.handleTouchDown);
-        document.addEventListener('touchend', this.handleTouchUp);
+        document.addEventListener('touchstart', this.handleTouchStart);
+        document.addEventListener('touchmove', this.handleTouchMove);
+        document.addEventListener('touchend', this.handleTouchEnd);
     }
 
     // Getters
@@ -71,24 +73,33 @@ export class Paddle {
         if (e.code === 'ArrowRight' || e.key === 'ArrowRight') this.moveRight = true;
     };
 
-    handleTouchDown = (e: TouchEvent): void => {
+    handleTouchStart = (e: TouchEvent): void => {
         touchstartX = e.changedTouches[0].screenX;
     };
-    handleTouchUp = (e: TouchEvent): void => {
+    handleTouchEnd = (e: TouchEvent): void => {
+        touchendX = 0;
+        this.changeDirection();
+        console.log('Stop');
+    };
+
+    handleTouchMove = (e: TouchEvent): void => {
         touchendX = e.changedTouches[0].screenX;
         this.changeDirection();
+        console.log(touchendX);
     };
 
     changeDirection(): void {
+        if (!touchendX) {
+            this.moveLeft = false;
+            this.moveRight = false;
+            return;
+        }
+
         if (touchendX < touchstartX) {
             this.moveLeft = true;
-        } else {
-            this.moveLeft = false;
         }
         if (touchendX > touchstartX) {
             this.moveRight = true;
-        } else {
-            this.moveRight = false;
         }
     }
 }
