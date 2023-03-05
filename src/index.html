@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Arkanoid</title>
+        <link rel="icon" sizes="32x32" href="./images/arkanoid.ico">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="data.css" /> 
+    </head>
+    <body>
+        <div id="main" class="main">
+            <canvas id="playField" width="1000" height="600"></canvas>
+            <img id="background" src="./images/black.jpg" />
+            <div id="title">
+                <img src="images/arkanoid-title.png" alt="Arkanoid">
+            </div>
+            <div id="win"></div>
+            <div id="display">
+                <div id="score"></div>
+                <button id="mute">
+                    <img src="./images/sound.png" alt="sound on/off" />
+                    <span class="line hide-line">|</span>
+                </button>
+                <button id="start">Start</button>
+                <div id="levelNumber"></div>
+                <div id="info">Press Start!</div>
+            </div>
+        </div>
+        <div class="setup">
+            <div class="clock">
+            <div class="wrap">
+              <span class="hour"></span>
+              <span class="minute"></span>
+              <span class="second"></span>
+              <span class="dot"></span>
+            </div>
+        </div>
+        <div class="lang">
+            <p class="active en">en</p>
+            <p class="ru">ru</p>
+        </div>
+</div>
+          <footer id="footer">
+            <h3>Arkanoid 2023</h3>
+            <a href="https://rs.school/"><img src="images/rs.png" alt="Rs School"></a>
+        </footer>
+        <script src="./index.ts"></script>
+    </body>
+</html>
