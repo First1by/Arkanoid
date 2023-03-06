@@ -1,1 +1,1 @@
-https://first1by.github.io/Arkanoid/dist/
+https://first1by.github.io/Arkanoid/dist
